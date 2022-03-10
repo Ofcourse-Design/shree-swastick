@@ -1,0 +1,2388 @@
+backend:
+  name: git-gateway
+  accept_roles:
+    - admin
+    - editor
+media_folder: theme/assets/images
+public_folder: /assets/images
+collections:
+  - name: pages
+    label: Pages
+    identifier_field: title
+    extension: md
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    folder: cms/pages
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '{{slug}}.html'
+      - &ref_0
+        label: Seo
+        name: seo
+        widget: object
+        collapsed: true
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: false
+          - label: Description
+            name: description
+            widget: string
+            required: false
+          - label: No index
+            name: noindex
+            widget: boolean
+            default: false
+            required: false
+          - label: Open Graph Title
+            name: og:title
+            widget: string
+            required: false
+          - label: Open Graph Image
+            name: og:image
+            widget: image
+            required: false
+            media_library:
+              config:
+                multiple: false
+          - label: Twitter Title
+            name: twitter:title
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Card
+            name: twitter:card
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Site
+            name: twitter:site
+            widget: string
+            required: false
+          - label: Twitter Creator
+            name: twitter:creator
+            widget: string
+            required: false
+          - label: Additional HTML tags
+            name: additional_tags
+            widget: text
+            required: false
+  - name: brochures
+    label: Brochures
+    folder: cms/brochures
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: f_category
+        label: Category
+        widget: select
+        required: false
+        options:
+          - label: Pavers
+            value: Pavers
+          - label: Furniture
+            value: Furniture
+      - hint: ''
+        name: f_description
+        label: Description
+        widget: text
+        required: false
+      - hint: ''
+        name: f_image
+        label: Image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_brochure-file
+        label: Brochure File
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: File
+            widget: file
+            required: false
+            allow_multiple: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: brochures
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[brochures].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: clients
+    label: Clients
+    folder: cms/clients
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: f_logo
+        label: Logo
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_company-page
+        label: Company Page
+        widget: string
+        required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: clients
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[clients].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: gallery
+    label: Galleries
+    folder: cms/gallery
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: f_title
+        label: Title
+        widget: string
+        required: false
+      - hint: ''
+        name: f_gallery-images
+        label: Gallery Images
+        widget: list
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: gallery
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[gallery].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: products
+    label: Products
+    folder: cms/products
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Description
+        name: body
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_primary-image
+        label: Primary Image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_category
+        label: Category
+        widget: select
+        required: false
+        options:
+          - label: PAVEMENT SOLUTION
+            value: PAVEMENT SOLUTION
+          - label: CURB STONES
+            value: CURB STONES
+          - label: PRECAST ELEMENTS
+            value: PRECAST ELEMENTS
+          - label: WALLING SOLUTION
+            value: WALLING SOLUTION
+      - hint: ''
+        name: f_sub-parent
+        label: Sub Parent
+        widget: string
+        required: false
+      - hint: ''
+        name: f_descriptionn
+        label: Descriptionn
+        widget: text
+        required: false
+      - hint: ''
+        name: f_applications
+        label: Applications
+        widget: string
+        required: false
+      - hint: ''
+        name: f_special-features
+        label: Special Features
+        widget: string
+        required: false
+      - hint: ''
+        name: f_available-sizes
+        label: Available Sizes
+        widget: text
+        required: false
+      - hint: ''
+        name: f_brochure
+        label: Brochure
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: File
+            widget: file
+            required: false
+            allow_multiple: false
+      - hint: Product Tag
+        name: f_tags
+        label: Tags
+        widget: string
+        required: false
+      - hint: ''
+        name: f_gallery
+        label: Gallery
+        widget: list
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_hide
+        label: Hide
+        widget: boolean
+        required: false
+      - hint: ''
+        name: f_order
+        label: order
+        widget: number
+        required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: products
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[products].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: post
+    label: Resources
+    folder: cms/post
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Post Body
+        name: body
+        widget: markdown
+        required: false
+      - hint: A summary of the blog post that appears on blog post grid
+        name: f_post-summary
+        label: Post Summary
+        widget: text
+        required: false
+      - hint: ''
+        name: f_main-image
+        label: Main Image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: Smaller version of main image that is used on blog post grid
+        name: f_thumbnail-image
+        label: Thumbnail image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_featured
+        label: Featured?
+        widget: boolean
+        required: false
+      - hint: ''
+        name: f_color
+        label: Color
+        widget: color
+        required: false
+        enableAlpha: true
+        allowInput: true
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: post
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[post].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - label: Theme Settings
+    name: settings
+    identifier_field: title
+    extension: json
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    files:
+      - label: General
+        name: site
+        file: cms/_data/settings/site.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: General
+          - hint: Full domain url (needed for a correct sitemap file)
+            name: domain
+            label: Domain
+            widget: string
+            required: false
+          - name: favicon
+            label: Favicon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: apple_touch_icon
+            label: Apple Touch Icon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: header_additional_content
+            label: Additional Content Header
+            hint: Content here will be placed before </head> tag
+            widget: text
+            required: false
+          - name: footer_additional_content
+            label: Additional Content Footer
+            hint: Content here will be placed before </body> tag
+            widget: text
+            required: false
+          - name: images_optimization
+            label: Images Optimization
+            widget: object
+            collapsed: false
+            fields:
+              - label: Image Formats
+                name: formats
+                widget: select
+                multiple: true
+                options:
+                  - label: Avif
+                    value: avif
+                  - label: Webp
+                    value: webp
+              - label: Image Dimensions
+                name: dimensions
+                widget: select
+                multiple: true
+                options:
+                  - label: '500'
+                    value: 500
+                  - label: '800'
+                    value: 800
+                  - label: '1080'
+                    value: 1080
+                  - label: '1600'
+                    value: 1600
+                  - label: '2000'
+                    value: 2000
+                  - label: '2600'
+                    value: 2600
+      - label: Colors
+        name: colors
+        file: cms/_data/colors.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Colors
+      - label: Texts
+        name: texts
+        file: cms/_data/texts.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Texts
+          - hint: 'Original text: Products, key: -37f9ca7c'
+            label: Text
+            name: '-37f9ca7c'
+            widget: string
+          - hint: 'Original text: Walling Solutions, key: -1c6b4e6e'
+            label: Text
+            name: '-1c6b4e6e'
+            widget: string
+          - hint: 'Original text: Pavement Solutions, key: 3b341638'
+            label: Text
+            name: 3b341638
+            widget: string
+          - hint: 'Original text: Curb Stones, key: -66e77f94'
+            label: Text
+            name: '-66e77f94'
+            widget: string
+          - hint: 'Original text: Precast Elements, key: -1b4d0ccb'
+            label: Text
+            name: '-1b4d0ccb'
+            widget: string
+          - hint: 'Original text: About us, key: 645f0031'
+            label: Text
+            name: 645f0031
+            widget: string
+          - hint: 'Original text: GBC, key: 112c8'
+            label: Text
+            name: 112c8
+            widget: string
+          - hint: 'Original text: Clients, key: -697be218'
+            label: Text
+            name: '-697be218'
+            widget: string
+          - hint: 'Original text: Gallery, key: 57850f32'
+            label: Text
+            name: 57850f32
+            widget: string
+          - hint: 'Original text: Brochures, key: 1a9e84af'
+            label: Text
+            name: 1a9e84af
+            widget: string
+          - hint: 'Original text: Get in touch, key: -5230a9d2'
+            label: Text
+            name: '-5230a9d2'
+            widget: string
+          - hint: 'Original text: Fly ash bricks (SSI & ACC), key: 148c096a'
+            label: Text
+            name: 148c096a
+            widget: string
+          - hint: 'Original text: Pre cast Boundary walls, key: -ae12989'
+            label: Text
+            name: '-ae12989'
+            widget: string
+          - hint: 'Original text: Pavers, key: -71ee393f'
+            label: Text
+            name: '-71ee393f'
+            widget: string
+          - hint: 'Original text: GRASS/ PERMEABLE PAVERS, key: -59c00667'
+            label: Text
+            name: '-59c00667'
+            widget: string
+          - hint: 'Original text: TILES, key: 4c20b65'
+            label: Text
+            name: 4c20b65
+            widget: string
+          - hint: 'Original text: FULL BATTER CURB, key: 4c8065c5'
+            label: Text
+            name: 4c8065c5
+            widget: string
+          - hint: 'Original text: HALF BATTER CURB, key: 736dad69'
+            label: Text
+            name: 736dad69
+            widget: string
+          - hint: 'Original text: BULL NOSE, key: -10a5fd40'
+            label: Text
+            name: '-10a5fd40'
+            widget: string
+          - hint: 'Original text: SQUARE, key: -6dc0b2e3'
+            label: Text
+            name: '-6dc0b2e3'
+            widget: string
+          - hint: 'Original text: QUADRENT CURBS, key: -63e534af'
+            label: Text
+            name: '-63e534af'
+            widget: string
+          - hint: 'Original text: OFFLET CURBS, key: 7c706f9d'
+            label: Text
+            name: 7c706f9d
+            widget: string
+          - hint: 'Original text: RADIUS CURBS, key: 4eda4563'
+            label: Text
+            name: 4eda4563
+            widget: string
+          - hint: 'Original text: GULLEY CURBS, key: -457e730d'
+            label: Text
+            name: '-457e730d'
+            widget: string
+          - hint: 'Original text: DISH CHANNEL, key: -458d8fa3'
+            label: Text
+            name: '-458d8fa3'
+            widget: string
+          - hint: 'Original text: COVER BLOCKS, key: 550ae62f'
+            label: Text
+            name: 550ae62f
+            widget: string
+          - hint: 'Original text: U SHAPED DRAIN WITH COVER, key: 1a35c1d7'
+            label: Text
+            name: 1a35c1d7
+            widget: string
+          - hint: 'Original text: DRAIN COVER, key: 69722f4f'
+            label: Text
+            name: 69722f4f
+            widget: string
+          - hint: 'Original text: FENCE POST, key: -46f514b1'
+            label: Text
+            name: '-46f514b1'
+            widget: string
+          - hint: 'Original text: BOLLARD, key: 2e7ca486'
+            label: Text
+            name: 2e7ca486
+            widget: string
+          - hint: 'Original text: MANHOLE COVER, key: -27afcb0f'
+            label: Text
+            name: '-27afcb0f'
+            widget: string
+          - hint: 'Original text: RCC SLABS, key: -3e93f615'
+            label: Text
+            name: '-3e93f615'
+            widget: string
+          - hint: 'Original text: COPING STONE, key: 2252a183'
+            label: Text
+            name: 2252a183
+            widget: string
+          - hint: 'Original text: STORM WATER SLABS, key: 65e0fa19'
+            label: Text
+            name: 65e0fa19
+            widget: string
+          - hint: 'Original text: BENCHES, key: 1d845ebe'
+            label: Text
+            name: 1d845ebe
+            widget: string
+          - hint: "Original text: OUTDOOR\_SEATING, key: 678b52d9"
+            label: Text
+            name: 678b52d9
+            widget: string
+          - hint: 'Original text: Resources, key: 13ede05'
+            label: Text
+            name: 13ede05
+            widget: string
+          - hint: 'Original text: Heading, key: -6d5fea1e'
+            label: Text
+            name: '-6d5fea1e'
+            widget: string
+          - hint: >-
+              Original text:  Aenean faucibus nibh et justo cursus id rutrum
+              lorem imperdiet. Nunc ut sem vitae risus tristique posuere., key:
+              1a8d49b2
+            label: Text
+            name: 1a8d49b2
+            widget: text
+          - hint: 'Original text: SQUARE PAVERS, key: -1f16a0fc'
+            label: Text
+            name: '-1f16a0fc'
+            widget: string
+          - hint: >-
+              Original text: The Square paver is one of the simplest and most
+              widely used paver shapes worldwide. They are easy to pack and
+              move, and can be laid in a wide range of interesting patterns that
+              work well in most scenarios., key: 284badc6
+            label: Text
+            name: 284badc6
+            widget: text
+          - hint: 'Original text: Learn More, key: -52bd880f'
+            label: Text
+            name: '-52bd880f'
+            widget: string
+          - hint: 'Original text: Green Building Centers, key: -4c5f8711'
+            label: Text
+            name: '-4c5f8711'
+            widget: string
+          - hint: >-
+              Original text: Green Building Centre (GBC) Raniganj run by Shree
+              Swastick Industries, Raniganj is manufacturing unit fully equipped
+              to develop end to end housing projects and solution as well as
+              developmental products and solution under Green India Initiative.,
+              key: -46ee9afa
+            label: Text
+            name: '-46ee9afa'
+            widget: text
+          - hint: 'Original text: Who we are, key: -47239b3c'
+            label: Text
+            name: '-47239b3c'
+            widget: string
+          - hint: >-
+              Original text: Eastern India’s first Fly Ash Brick manufacturing
+              unit and got the concept of Green Products to the people of the
+              state and neighbouring states. Since then, the company has
+              believed and kept is motive of Green Products., key: 242695ff
+            label: Text
+            name: 242695ff
+            widget: text
+          - hint: 'Original text: GRASS PAVERS, key: -3c9b6795'
+            label: Text
+            name: '-3c9b6795'
+            widget: string
+          - hint: 'Original text: Grass Paver, key: -152beb18'
+            label: Text
+            name: '-152beb18'
+            widget: string
+          - hint: >-
+              Original text:  are a strong interlocking 100% cellular porous
+              paving grid system for grass reinforcement, ground stabilization &
+              gravel retention for regular trafficked surfaces like pedestrian
+              and vehicles., key: 11ed69a
+            label: Text
+            name: 11ed69a
+            widget: text
+          - hint: "Original text: WALLING\_SOLUTIONS, key: 2a652512"
+            label: Text
+            name: 2a652512
+            widget: string
+          - hint: "Original text: PAVEMENT\_SOLUTIONS, key: 6cc8c998"
+            label: Text
+            name: 6cc8c998
+            widget: string
+          - hint: 'Original text: CURB STONES, key: -769b1794'
+            label: Text
+            name: '-769b1794'
+            widget: string
+          - hint: 'Original text: PRECAST ELEMENTS, key: -5401f4eb'
+            label: Text
+            name: '-5401f4eb'
+            widget: string
+          - hint: "Original text: Fly Ash Cement Bricks are high-tech well improved quality bricks used for masonry in the construction of buildings. They \_are a part of good and aﬀordable building materials., key: -5b820ccc"
+            label: Text
+            name: '-5b820ccc'
+            widget: text
+          - hint: 'Original text: PAVEMENT SOLUTIONS, key: 48103a18'
+            label: Text
+            name: 48103a18
+            widget: string
+          - hint: >-
+              Original text: Lorem ipsum dolor sit amet, consectetur adipiscing
+              elit. Suspendisse varius enim in eros elementum tristique. Duis
+              cursus, mi quis viverra ornare, eros dolor interdum nulla, ut
+              commodo diam libero vitae erat. Aenean faucibus nibh et justo
+              cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
+              tristique posuere., key: -5286fc08
+            label: Text
+            name: '-5286fc08'
+            widget: text
+          - hint: "Original text: CURB\_STONES, key: -37d7714"
+            label: Text
+            name: '-37d7714'
+            widget: string
+          - hint: >-
+              Original text: Our ranges of Kerbstones are designed to complement
+              block paving and at the same time serves as an ideal, attractive
+              and versatile edge restraint. Extensive engineering and a good
+              selection of components make this an exceptional bonding unit for
+              paving blocks., key: 34f879cd
+            label: Text
+            name: 34f879cd
+            widget: text
+          - hint: "Original text: PRECAST\_ELEMENTS, key: -31ca746b"
+            label: Text
+            name: '-31ca746b'
+            widget: string
+          - hint: >-
+              Original text: We manufacture a wide range of precast products.,
+              key: 605e1663
+            label: Text
+            name: '605e1663'
+            widget: string
+          - hint: 'Original text: ABOUT US, key: -70d4fbcf'
+            label: Text
+            name: '-70d4fbcf'
+            widget: string
+          - hint: >-
+              Original text: The Company was established in 2004 in Raniganj,
+              West Bengal by Shri Shankar Mal Tantia and Mr. Santosh Tantia. It
+              was setup Eastern India’s first Fly Ash Brick manufacturing unit
+              and got the concept of Green Products to the people of the state
+              and neighbouring states. Since then, the company has believed and
+              kept is motive of Green Products”., key: -4b697217
+            label: Text
+            name: '-4b697217'
+            widget: text
+          - hint: 'Original text: MANUFACTURING TECHNOLOGY, key: -7f6b72b2'
+            label: Text
+            name: '-7f6b72b2'
+            widget: string
+          - hint: >-
+              Original text: Manufacturing facility is fully equipped with
+              state-of-the-art machinery. With batching plant for accuracy of
+              the mix prepared to the vibro press for proper compaction and
+              smooth finish, the product is prepared to satisfy relevant IS
+              codes. Cuber is installed so that the products are depallet,
+              stacked and bundled without any human interference. , key:
+              -74d7c567
+            label: Text
+            name: '-74d7c567'
+            widget: text
+          - hint: >-
+              Original text: Practice with quality assurance programmes.
+              Products with performance attributes in line with changing design
+              trends and new innovative applications. Swastick Group products
+              adhere to IS standard. Production facilities are operated in
+              accordance with World Class Manufacturing with Cement - OPC 53
+              grade, key: -e205131
+            label: Text
+            name: '-e205131'
+            widget: text
+          - hint: "Original text: QUALITY\_CONTROL, key: -41940584"
+            label: Text
+            name: '-41940584'
+            widget: string
+          - hint: >-
+              Original text: We test our pavers not just after they are
+              manufactured but constantly during the process. We do this to
+              deliver high quality pavers in each batch. , key: 4d6ef299
+            label: Text
+            name: 4d6ef299
+            widget: text
+          - hint: >-
+              Original text: All the raw materials entering the manufacturing
+              unit gets tested to prepare the best mix design for the quality
+              products., key: -156e5971
+            label: Text
+            name: '-156e5971'
+            widget: text
+          - hint: 'Original text: GREEN APPROACH. SUPPORTED BY ACC, key: 23824fa1'
+            label: Text
+            name: 23824fa1
+            widget: string
+          - hint: 'Original text: Concrete Design , key: 61122b87'
+            label: Text
+            name: 61122b87
+            widget: string
+          - hint: >-
+              Original text: ( BIS Approved and ISO 9001:2015 Certified) , key:
+              -2bc3c39f
+            label: Text
+            name: '-2bc3c39f'
+            widget: string
+          - hint: >-
+              Original text: aims to accelerate the production and
+              commercialization of Fly Ash Bricks, PCC Bricks, Solid Blocks and
+              Hollow Blocks, anti-skid pavers, Interlocking pavers, concrete
+              tiles, concrete furniture and concrete cover blocks, key: 3b6fd877
+            label: Text
+            name: 3b6fd877
+            widget: text
+          - hint: "Original text: CONTACT\_US, key: 2541b33e"
+            label: Text
+            name: 2541b33e
+            widget: string
+          - hint: >-
+              Original text: Thank you! Your submission has been received!, key:
+              5a0ea5a1
+            label: Text
+            name: 5a0ea5a1
+            widget: string
+          - hint: >-
+              Original text: Oops! Something went wrong while submitting the
+              form., key: -7c112e99
+            label: Text
+            name: '-7c112e99'
+            widget: string
+          - hint: 'Original text: Admin Office:, key: -1f60bf13'
+            label: Text
+            name: '-1f60bf13'
+            widget: string
+          - hint: >-
+              Original text:  39 G.T. Road, Bansra More P.O. Searsole Rajbari -
+              713358, Raniganj, Dist. Burdwan (W.B.) , key: 60a19766
+            label: Text
+            name: 60a19766
+            widget: string
+          - hint: 'Original text: Contact:, key: -1df83bc6'
+            label: Text
+            name: '-1df83bc6'
+            widget: string
+          - hint: 'Original text: (+91) 98325 32756 , key: d8ed9a2'
+            label: Text
+            name: d8ed9a2
+            widget: string
+          - hint: 'Original text: Email:, key: 7bec143e'
+            label: Text
+            name: 7bec143e
+            widget: string
+          - hint: 'Original text: shree_swastick@yahoo.com, key: -4a261f98'
+            label: Text
+            name: '-4a261f98'
+            widget: string
+          - hint: 'Original text: ‍, key: 200d'
+            label: Text
+            name: 200d
+            widget: string
+          - hint: 'Original text: Factory:, key: 22555490'
+            label: Text
+            name: '22555490'
+            widget: string
+          - hint: >-
+              Original text:  Plot No. 210, Mouza-Kunustoria, P.O. - Toposi,
+              P.S. - Jamuria - 713362, Dist. Paschim Bardhaman (W.B.), key:
+              -6dccfccc
+            label: Text
+            name: '-6dccfccc'
+            widget: text
+          - hint: 'Original text: PRODUCTS, key: -d2e3e9c'
+            label: Text
+            name: '-d2e3e9c'
+            widget: string
+          - hint: 'Original text: LINKS, key: 4515799'
+            label: Text
+            name: '4515799'
+            widget: string
+          - hint: 'Original text: About Us, key: 645efc51'
+            label: Text
+            name: 645efc51
+            widget: string
+          - hint: "Original text: FOLLOW\_US, key: -2c3fb613"
+            label: Text
+            name: '-2c3fb613'
+            widget: string
+          - hint: >-
+              Original text: ©2021 Shree Swastick Industries. Copyrights
+              Reserved | AN ISO 9001:2000 Certified Company | Udyam
+              Registration: UDYAM-WB-23-0000753, key: -51fd581d
+            label: Text
+            name: '-51fd581d'
+            widget: text
+          - hint: 'Original text: Protected Page, key: -11d4bbff'
+            label: Text
+            name: '-11d4bbff'
+            widget: string
+          - hint: >-
+              Original text: Incorrect password. Please try again., key:
+              -f5c4b5f
+            label: Text
+            name: '-f5c4b5f'
+            widget: string
+          - hint: 'Original text: Page Not Found, key: -40b0787c'
+            label: Text
+            name: '-40b0787c'
+            widget: string
+          - hint: >-
+              Original text: The page you are looking for doesn't exist or has
+              been moved., key: 583f3656
+            label: Text
+            name: 583f3656
+            widget: string
+          - hint: 'Original text: Go Back to Safety, key: 2ba98276'
+            label: Text
+            name: 2ba98276
+            widget: string
+          - hint: >-
+              Original text: The Company was established in 2004 in Raniganj,
+              West Bengal by Shri Shankar Mal Tantia and Mr. Santosh Tantia. ,
+              key: 43a604a6
+            label: Text
+            name: 43a604a6
+            widget: text
+          - hint: "Original text: Over the past two decades, since its inception, Swastick group has built growth and high-stature through consistent high design and quality parameters that have truly made a significant difference to ease, comfort and efficiency to lives that interact with or inhabit these spaces. The company which once started as a small development firm has now turned into a huge company with the third generation currently keeping up the family name and business. They believe in possibilities. Most of our projects have been built on people’s trust and references.\_, key: 21732719"
+            label: Text
+            name: '21732719'
+            widget: text
+          - hint: >-
+              Original text: Every accomplishment becomes a foundation for them
+              to do better, to dream bigger, and create a better future. Their
+              impact on life is all-encompassing, be it the comfort of a home,
+              efficiency in the office, recreation, shopping or space to learn
+              and grow. Courage and dedication though the passing generations
+              has helped them spawn into a multi-vertical firm, making a mark in
+              every promising industry the construction market has to offer. The
+              Swastick Group today has become a name that is synonymous with
+              innovation., key: -4ebb6df7
+            label: Text
+            name: '-4ebb6df7'
+            widget: text
+          - hint: 'Original text: DIRECTOR’S MESSAGE, key: -6379aa53'
+            label: Text
+            name: '-6379aa53'
+            widget: string
+          - hint: 'Original text: CHAIRMAN’S MESSAGE, key: -14d7b0aa'
+            label: Text
+            name: '-14d7b0aa'
+            widget: string
+          - hint: 'Original text: No items found., key: 3d503d2b'
+            label: Text
+            name: 3d503d2b
+            widget: string
+          - hint: 'Original text: Contact Us, key: 7f2746de'
+            label: Text
+            name: 7f2746de
+            widget: string
+          - hint: >-
+              Original text: Admin Office: 39 G.T. Road, Bansra More P.O.
+              Searsole Rajbari - 713358, Raniganj, Dist. Burdwan (W.B.) , key:
+              48117213
+            label: Text
+            name: '48117213'
+            widget: text
+          - hint: >-
+              Original text: Factory: Plot No. 210, Mouza-Kunustoria, P.O. -
+              Toposi, P.S. - Jamuria - 713362, Dist. Paschim Bardhaman (W.B.)
+              Contact: (+91) 98325 32756 Email: shree_swastick@yahoo.com, key:
+              -49200542
+            label: Text
+            name: '-49200542'
+            widget: text
+          - hint: 'Original text: FLY ASH BRICKS (SSI & ACC), key: -6afb4e76'
+            label: Text
+            name: '-6afb4e76'
+            widget: string
+          - hint: "Original text: Fly Ash Cement Bricks are high-tech well improved quality bricks used for masonry in the construction of buildings. They \_are a part of good and affordable building materials. They contain Fly ash, OPC Cement, Sand, Fine Aggregate, Stone Dust, Water and Additive., key: 270a673d"
+            label: Text
+            name: 270a673d
+            widget: text
+          - hint: 'Original text: Appearance, key: -1e16677c'
+            label: Text
+            name: '-1e16677c'
+            widget: string
+          - hint: 'Original text: Dark Grey Cement Colour, key: b91e295'
+            label: Text
+            name: b91e295
+            widget: string
+          - hint: >-
+              Original text: Uniform in shape and smooth in finish., key:
+              -7e77de05
+            label: Text
+            name: '-7e77de05'
+            widget: string
+          - hint: 'Original text: No or Less plaster required., key: 440b9579'
+            label: Text
+            name: 440b9579
+            widget: string
+          - hint: >-
+              Original text: Dense composition, uniform size with frog., key:
+              -5bd77d9a
+            label: Text
+            name: '-5bd77d9a'
+            widget: string
+          - hint: >-
+              Original text: Less porous to the ordinary clay bricks., key:
+              29212966
+            label: Text
+            name: '29212966'
+            widget: string
+          - hint: >-
+              Original text: Applied lesser than clay bricks as the later are of
+              variable sizes and generally undersize., key: 5c5ab98
+            label: Text
+            name: 5c5ab98
+            widget: text
+          - hint: >-
+              Original text: Structural capabilities / Cost Effective, key:
+              21075c6c
+            label: Text
+            name: 21075c6c
+            widget: string
+          - hint: >-
+              Original text: Available in several load-bearing grades., key:
+              2f30e021
+            label: Text
+            name: 2f30e021
+            widget: string
+          - hint: 'Original text: Savings in mortar plastering., key: -2270c538'
+            label: Text
+            name: '-2270c538'
+            widget: string
+          - hint: >-
+              Original text: Better resistance for earthquake loads due to panel
+              action with high strength bricks., key: 7dd5e22e
+            label: Text
+            name: 7dd5e22e
+            widget: string
+          - hint: >-
+              Original text: Compressive strength of our bricks is average 12
+              N/mm² (as against 3.50 N/mm² for red clay bricks)., key: -54fd8949
+            label: Text
+            name: '-54fd8949'
+            widget: text
+          - hint: 'Original text: Less breakage and wastage., key: -1da57a44'
+            label: Text
+            name: '-1da57a44'
+            widget: string
+          - hint: >-
+              Original text: Durability, Savings and Moisture Resistance, key:
+              -21841b4
+            label: Text
+            name: '-21841b4'
+            widget: string
+          - hint: >-
+              Original text: Highly durable, the bricks can be directly applied
+              with the coating of Putty or POP., key: 74104b2a
+            label: Text
+            name: 74104b2a
+            widget: string
+          - hint: >-
+              Original text: These can be directly painted in dry distemper and
+              cement paints, without the backing coat of plaster., key:
+              -6394ae15
+            label: Text
+            name: '-6394ae15'
+            widget: text
+          - hint: >-
+              Original text: Water absorption is 6- 10% as against 25-35% for
+              red clay bricks, reducing dampness of the walls., key: -df95f3f
+            label: Text
+            name: '-df95f3f'
+            widget: text
+          - hint: >-
+              Original text: Thermal / Sound insulation / Fire & Vermin
+              resistance, key: 146752dc
+            label: Text
+            name: 146752dc
+            widget: string
+          - hint: 'Original text: These bricks absorb less heat., key: -732bbd67'
+            label: Text
+            name: '-732bbd67'
+            widget: string
+          - hint: >-
+              Original text: It provides an acceptable degree of sound
+              insulation., key: 3481ab34
+            label: Text
+            name: 3481ab34
+            widget: string
+          - hint: >-
+              Original text: These bricks have a good fire rating., key:
+              -1dec699c
+            label: Text
+            name: '-1dec699c'
+            widget: string
+          - hint: >-
+              Original text: There is no problem of vermin attacks or
+              infestation., key: -7466ff28
+            label: Text
+            name: '-7466ff28'
+            widget: string
+          - hint: 'Original text: Environment Friendly, key: 6f25d458'
+            label: Text
+            name: 6f25d458
+            widget: string
+          - hint: >-
+              Original text: Red clay brick kilns emit around a million tons of
+              Co² every year which pollute our air., key: 5997cfba
+            label: Text
+            name: 5997cfba
+            widget: string
+          - hint: >-
+              Original text: Fly ash bricks curb global carbon emission., key:
+              -33f286f6
+            label: Text
+            name: '-33f286f6'
+            widget: string
+          - hint: >-
+              Original text: Fly ash bricks store carbon dioxide from the
+              environment, adding another green benefit., key: 6817d50d
+            label: Text
+            name: 6817d50d
+            widget: string
+          - hint: >-
+              Original text: Use of Fly Ash brick reduces damage to agricultural
+              land which is excavated to manufacture red clay bricks., key:
+              3ea74cf5
+            label: Text
+            name: 3ea74cf5
+            widget: text
+          - hint: >-
+              Original text: Use of Fly ash bricks in place of red clay bricks
+              conforms to Supreme Court, key: -4ba35988
+            label: Text
+            name: '-4ba35988'
+            widget: string
+          - hint: 'Original text: All Products, key: 24263543'
+            label: Text
+            name: '24263543'
+            widget: string
+          - hint: 'Original text: Styleguide, key: 7f9ce00b'
+            label: Text
+            name: 7f9ce00b
+            widget: string
+          - hint: 'Original text: Source of truth of this template., key: -72249d5e'
+            label: Text
+            name: '-72249d5e'
+            widget: string
+          - hint: 'Original text: Headings, key: -3e9d592f'
+            label: Text
+            name: '-3e9d592f'
+            widget: string
+          - hint: 'Original text: Heading Jumbo, key: -145ea78f'
+            label: Text
+            name: '-145ea78f'
+            widget: string
+          - hint: 'Original text: Heading 1, key: 6af22973'
+            label: Text
+            name: 6af22973
+            widget: string
+          - hint: 'Original text: Heading 2, key: 6af22974'
+            label: Text
+            name: 6af22974
+            widget: string
+          - hint: 'Original text: Heading 3, key: 6af22975'
+            label: Text
+            name: 6af22975
+            widget: string
+          - hint: 'Original text: Heading 4, key: 6af22976'
+            label: Text
+            name: 6af22976
+            widget: string
+          - hint: 'Original text: Heading 5, key: 6af22977'
+            label: Text
+            name: 6af22977
+            widget: string
+          - hint: 'Original text: Heading 6, key: 6af22978'
+            label: Text
+            name: 6af22978
+            widget: string
+          - hint: 'Original text: Paragraphs & Links, key: -741f991c'
+            label: Text
+            name: '-741f991c'
+            widget: string
+          - hint: 'Original text: Paragraph-bigger, key: 7f5cffb3'
+            label: Text
+            name: 7f5cffb3
+            widget: string
+          - hint: 'Original text: Paragraph, key: -145e16b2'
+            label: Text
+            name: '-145e16b2'
+            widget: string
+          - hint: 'Original text: Paragraph-de-emphasized, key: -3ae60411'
+            label: Text
+            name: '-3ae60411'
+            widget: string
+          - hint: 'Original text: Paragraph-smaller, key: -9f1e58b'
+            label: Text
+            name: '-9f1e58b'
+            widget: string
+          - hint: 'Original text: Paragraph-tiny, key: 51f22c1f'
+            label: Text
+            name: 51f22c1f
+            widget: string
+          - hint: 'Original text: Label, key: 45c8ed4'
+            label: Text
+            name: 45c8ed4
+            widget: string
+          - hint: 'Original text: A text link, key: 15ec15ee'
+            label: Text
+            name: 15ec15ee
+            widget: string
+          - hint: "Original text: Buttons & Form\_Elements, key: 7808f01a"
+            label: Text
+            name: 7808f01a
+            widget: string
+          - hint: 'Original text: Explore, key: 15309273'
+            label: Text
+            name: '15309273'
+            widget: string
+          - hint: 'Original text: Spacer, key: -6c05e3b4'
+            label: Text
+            name: '-6c05e3b4'
+            widget: string
+          - hint: 'Original text: Rich Text Element, key: -6038a453'
+            label: Text
+            name: '-6038a453'
+            widget: string
+          - hint: 'Original text: What’s a Rich Text element?, key: -3c0dda4d'
+            label: Text
+            name: '-3c0dda4d'
+            widget: string
+          - hint: >-
+              Original text: The rich text element allows you to create and
+              format headings, paragraphs, blockquotes, images, and video all in
+              one place instead of having to add and format them individually.
+              Just double-click and easily create content. , key: -61fbaf0a
+            label: Text
+            name: '-61fbaf0a'
+            widget: text
+          - hint: >-
+              Original text: The rich text element allows you to create and
+              format headings, paragraphs, blockquotes, images, and video all in
+              one place instead of having to add and format them individually.
+              Just double-click and easily create content., key: 2e633c6a
+            label: Text
+            name: 2e633c6a
+            widget: text
+          - hint: 'Original text: Static and dynamic content editing, key: 57fa6135'
+            label: Text
+            name: 57fa6135
+            widget: string
+          - hint: >-
+              Original text: A rich text element can be used with static or
+              dynamic content. For static content, just drop it into any page
+              and begin editing. For dynamic content, add a rich text field to
+              any collection and then connect a rich text element to that field
+              in the settings panel. Voila!, key: -a016b40
+            label: Text
+            name: '-a016b40'
+            widget: text
+          - hint: >-
+              Original text: How to customize formatting for each rich text,
+              key: -4bffb26e
+            label: Text
+            name: '-4bffb26e'
+            widget: string
+          - hint: >-
+              Original text: Headings, paragraphs, blockquotes, figures, images,
+              and figure captions can all be styled after a class is added to
+              the rich text element using the "When inside of" nested selector
+              system., key: -43ba1153
+            label: Text
+            name: '-43ba1153'
+            widget: text
+          - hint: >-
+              Original text: The rich text element allows you to create and
+              format headings, key: -1d523863
+            label: Text
+            name: '-1d523863'
+            widget: string
+          - hint: >-
+              Original text: Headings, paragraphs, blockquotes, figures, images,
+              and figure captions, key: 388ac0ab
+            label: Text
+            name: 388ac0ab
+            widget: string
+          - hint: >-
+              Original text: A rich text element can be used with static or
+              dynamic content., key: 5d5dfeb3
+            label: Text
+            name: 5d5dfeb3
+            widget: string
+          - hint: "Original text: LUXURY\_YACHT, key: -5324b6cc"
+            label: Text
+            name: '-5324b6cc'
+            widget: string
+          - hint: 'Original text: Home, key: 2268ff'
+            label: Text
+            name: 2268ff
+            widget: string
+          - hint: 'Original text: Buy, key: 10666'
+            label: Text
+            name: '10666'
+            widget: string
+          - hint: 'Original text: Featured Yachts, key: -53006722'
+            label: Text
+            name: '-53006722'
+            widget: string
+          - hint: 'Original text: Northwind 26.21M, key: 1fd6a457'
+            label: Text
+            name: 1fd6a457
+            widget: string
+          - hint: 'Original text: New to the market, key: -21bf3110'
+            label: Text
+            name: '-21bf3110'
+            widget: string
+          - hint: 'Original text: Quite Essential 55M, key: bdda2f1'
+            label: Text
+            name: bdda2f1
+            widget: string
+          - hint: 'Original text: Buy a yacht, key: 61b3186e'
+            label: Text
+            name: 61b3186e
+            widget: string
+          - hint: 'Original text: Yacht for sale, key: -51c20349'
+            label: Text
+            name: '-51c20349'
+            widget: string
+          - hint: 'Original text: Featured yacht, key: -3276e1ab'
+            label: Text
+            name: '-3276e1ab'
+            widget: string
+          - hint: 'Original text: Recent sale, key: -189f2d34'
+            label: Text
+            name: '-189f2d34'
+            widget: string
+          - hint: 'Original text: Buying Guide, key: 7537d178'
+            label: Text
+            name: 7537d178
+            widget: string
+          - hint: 'Original text: Why Choose Us ?, key: -6818cd2'
+            label: Text
+            name: '-6818cd2'
+            widget: string
+          - hint: 'Original text: Contact a Yacht Broker, key: -267f8ccf'
+            label: Text
+            name: '-267f8ccf'
+            widget: string
+          - hint: 'Original text: Sell, key: 274372'
+            label: Text
+            name: '274372'
+            widget: string
+          - hint: 'Original text: Sell a yacht, key: 1d81897a'
+            label: Text
+            name: 1d81897a
+            widget: string
+          - hint: 'Original text: Charter, key: -70ba0315'
+            label: Text
+            name: '-70ba0315'
+            widget: string
+          - hint: 'Original text: Manage, key: -7710767b'
+            label: Text
+            name: '-7710767b'
+            widget: string
+          - hint: 'Original text: Build, key: 3d8d64e'
+            label: Text
+            name: 3d8d64e
+            widget: string
+          - hint: 'Original text: Crew, key: 202d81'
+            label: Text
+            name: 202d81
+            widget: string
+          - hint: 'Original text: About, key: 3c2336d'
+            label: Text
+            name: 3c2336d
+            widget: string
+          - hint: 'Original text: News, key: 24fef3'
+            label: Text
+            name: 24fef3
+            widget: string
+          - hint: 'Original text: Contact, key: -64104400'
+            label: Text
+            name: '-64104400'
+            widget: string
+          - hint: 'Original text: Our Clients, key: 314704f4'
+            label: Text
+            name: 314704f4
+            widget: string
+          - hint: 'Original text: Download Brochure, key: 7c7e74bc'
+            label: Text
+            name: 7c7e74bc
+            widget: string
+          - hint: 'Original text: Description, key: -360d424'
+            label: Text
+            name: '-360d424'
+            widget: string
+          - hint: 'Original text: Available Sizes, key: -7bd873c5'
+            label: Text
+            name: '-7bd873c5'
+            widget: string
+          - hint: 'Original text: Applications, key: 41a7f943'
+            label: Text
+            name: 41a7f943
+            widget: string
+          - hint: 'Original text: Special Features, key: -17f513fc'
+            label: Text
+            name: '-17f513fc'
+            widget: string
+          - hint: 'Original text: Categories, key: -3be6ddc4'
+            label: Text
+            name: '-3be6ddc4'
+            widget: string
+          - hint: >-
+              Original text: See our products in the real world used at several
+              of our client locations., key: 2ff1cb97
+            label: Text
+            name: 2ff1cb97
+            widget: string
+          - hint: 'Original text: View More, key: 162663f0'
+            label: Text
+            name: 162663f0
+            widget: string
+          - hint: 'Original text: View, key: 28aec5'
+            label: Text
+            name: 28aec5
+            widget: string
+          - hint: >-
+              Original text: Pavers with excellent loadbearing capacity and high
+              in abrasion resistance, most suitable for hardscape. Most suitable
+              for roads with heavy traffic movement, ports, container yards,
+              warehouse and industrial plots., key: -5cbce783
+            label: Text
+            name: '-5cbce783'
+            widget: text
+          - hint: 'Original text: Pavers Special Features, key: 3a351f83'
+            label: Text
+            name: 3a351f83
+            widget: string
+          - hint: 'Original text: Aesthetic & pedestrian, key: -5a8f5cd7'
+            label: Text
+            name: '-5a8f5cd7'
+            widget: string
+          - hint: 'Original text: Cost Competitive, key: -5e5b7144'
+            label: Text
+            name: '-5e5b7144'
+            widget: string
+          - hint: 'Original text: Heavy & Light vehicle friendly, key: -6184f864'
+            label: Text
+            name: '-6184f864'
+            widget: string
+          - hint: 'Original text: Easy to clean & maintain, key: 378ec083'
+            label: Text
+            name: 378ec083
+            widget: string
+          - hint: 'Original text: Undulated finish & rustic look, key: 4f406ca6'
+            label: Text
+            name: 4f406ca6
+            widget: string
+          - hint: >-
+              Original text: Contributes to ground water recharge, key:
+              -1bf8cd42
+            label: Text
+            name: '-1bf8cd42'
+            widget: string
+          - hint: 'Original text: Different designs can be made, key: 2752b6d0'
+            label: Text
+            name: 2752b6d0
+            widget: string
+          - hint: >-
+              Original text: Male female interlock makes it one of the best
+              pavers, key: -20249101
+            label: Text
+            name: '-20249101'
+            widget: string
+          - hint: >-
+              Original text: Grass block pavers—also known as turf block pavers
+              or grow-through pavers—are an alternative to asphalt, concrete,
+              and traditional pavers. They’re made of concrete with open cells
+              that allow grass to grow through them. They’re a porous,
+              eco-friendly option for driveways and parking areas., key: 5495a6
+            label: Text
+            name: 5495a6
+            widget: text
+          - hint: >-
+              Original text: Grass block pavers recharge groundwater. Those
+              spots of grass allow rain to seep into the ground, putting it back
+              into aquifers, very important in arid climates where water supply
+              is tight. The grass and soil in your grow-through pavers will
+              filter out the pollutants, so the water that returns to the earth
+              is clean., key: 499cfc9b
+            label: Text
+            name: 499cfc9b
+            widget: text
+          - hint: >-
+              Original text: Porous pavers keep the air around your driveway
+              cooler., key: -515e6782
+            label: Text
+            name: '-515e6782'
+            widget: string
+          - hint: 'Original text: Grass / permeable pavers Advantages, key: 6f2c3f9b'
+            label: Text
+            name: 6f2c3f9b
+            widget: string
+          - hint: >-
+              Original text: Eco- friendly option for driveways and parking
+              areas., key: -644d27c4
+            label: Text
+            name: '-644d27c4'
+            widget: string
+          - hint: >-
+              Original text: Grass block pavers recharge groundwater, key:
+              78f49ef9
+            label: Text
+            name: 78f49ef9
+            widget: string
+          - hint: >-
+              Original text: Porous pavers keep the ai around your driveway
+              cooler, key: -633bea30
+            label: Text
+            name: '-633bea30'
+            widget: string
+          - hint: >-
+              Original text: Cement based tiles are undeniably strong material.
+              These tiles are an evolution to basic ceramic tiles. Various
+              patterns can be created using them., key: -f509ad8
+            label: Text
+            name: '-f509ad8'
+            widget: text
+          - hint: >-
+              Original text: APPLICATION: Used for Footpaths, Entrance and
+              Staircases of Buildings, Passages, Lawns, etc. , key: -18d3012f
+            label: Text
+            name: '-18d3012f'
+            widget: text
+          - hint: 'Original text: Tiles Advantages, key: -bd0c29d'
+            label: Text
+            name: '-bd0c29d'
+            widget: string
+          - hint: >-
+              Original text: Protects the existing floor from damage., key:
+              248e90c7
+            label: Text
+            name: 248e90c7
+            widget: string
+          - hint: >-
+              Original text: Eliminates any potential trip hazards., key:
+              -4929305d
+            label: Text
+            name: '-4929305d'
+            widget: string
+          - hint: >-
+              Original text: Reduces damage caused by impact, abrasion and
+              vibration., key: 4b397604
+            label: Text
+            name: 4b397604
+            widget: string
+          - hint: >-
+              Original text: Resistant to most solvents and chemicals., key:
+              8a2fa8d
+            label: Text
+            name: 8a2fa8d
+            widget: string
+          - hint: >-
+              Original text: Good thermal and acoustic insulation., key:
+              5c478936
+            label: Text
+            name: 5c478936
+            widget: string
+          - hint: >-
+              Original text: It is safe to walk even on wet surfaces owing to
+              its anti-skid properties., key: 78eb9483
+            label: Text
+            name: 78eb9483
+            widget: string
+          - hint: >-
+              Original text: Highly used in residential as well as commercial
+              places due to features like resistance to adverse weather
+              conditions, easy maintenance and perfect finish., key: -48251c8c
+            label: Text
+            name: '-48251c8c'
+            widget: text
+          - hint: 'Original text: Curb Stone advantages, key: 28a9b281'
+            label: Text
+            name: 28a9b281
+            widget: string
+          - hint: >-
+              Original text: Provide additional strength to the edge of the
+              carriageway, key: -42b84de9
+            label: Text
+            name: '-42b84de9'
+            widget: string
+          - hint: >-
+              Original text: Provide demarcation line between roads and footpath
+              and deter traffic., key: 3384f97d
+            label: Text
+            name: 3384f97d
+            widget: string
+          - hint: >-
+              Original text: Prevent vegetation to encroach on roads., key:
+              fbd31e6
+            label: Text
+            name: fbd31e6
+            widget: string
+          - hint: >-
+              Original text: Improves the aesthetic of hardscape., key:
+              -1a51908c
+            label: Text
+            name: '-1a51908c'
+            widget: string
+          - hint: 'Original text: Precast advantages, key: 14787c46'
+            label: Text
+            name: 14787c46
+            widget: string
+          - hint: 'Original text: Reduce time on site., key: 74355f1f'
+            label: Text
+            name: 74355f1f
+            widget: string
+          - hint: 'Original text: Lower site labor cost., key: 64835617'
+            label: Text
+            name: '64835617'
+            widget: string
+          - hint: >-
+              Original text: Reduces air pollution, noise and debris., key:
+              -4d66cdf1
+            label: Text
+            name: '-4d66cdf1'
+            widget: string
+          - hint: 'Original text: Expedited construction., key: 63249343'
+            label: Text
+            name: '63249343'
+            widget: string
+          - hint: 'Original text: Heat resistant., key: 4a088621'
+            label: Text
+            name: 4a088621
+            widget: string
+          - hint: >-
+              Original text: Reduces propping and scaffolding costs., key:
+              351c1ebd
+            label: Text
+            name: 351c1ebd
+            widget: string
+          - hint: 'Original text: Green Building Center , key: -4c5f8764'
+            label: Text
+            name: '-4c5f8764'
+            widget: string
+          - hint: 'Original text: Green Building Center, key: -658f77fc'
+            label: Text
+            name: '-658f77fc'
+            widget: string
+          - hint: >-
+              Original text: (BIS Approved and ISO 9001:2015 Certified) , key:
+              -76a8c46f
+            label: Text
+            name: '-76a8c46f'
+            widget: string
+          - hint: >-
+              Original text: aims to accelerate the production and
+              commercialization of Fly Ash Bricks, PCC Bricks, Solid Blocks and
+              Hollow Blocks, anti-skid pavers, Interlocking pavers, concrete
+              tiles, concrete furniture and concrete cover blocks., key:
+              328b3697
+            label: Text
+            name: 328b3697
+            widget: text
+          - hint: >-
+              Original text: Supported by ACC Limited, a Lafarge-Holcim
+              operating Company in India, GBC Raniganj provides consistent
+              quality products leading to long lasting roads and building
+              infrastructure. , key: 5d650d5f
+            label: Text
+            name: 5d650d5f
+            widget: text
+          - hint: "Original text: The environmental-friendly and cost-effective solution addresses the growing demands for affordable housing and other construction projects. It also addresses deforestation and sustainable resource management in emerging construction scenario by providing low carbon construction technique.\_\_, key: fdebbc5"
+            label: Text
+            name: fdebbc5
+            widget: text
+      - label: Links
+        name: links
+        file: cms/_data/links.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Links
+          - hint: 'Original link: /, key: 2f'
+            label: Link
+            name: 2f
+            widget: string
+          - hint: 'Original link: #, key: 23'
+            label: Link
+            name: '23'
+            widget: string
+          - hint: 'Original link: /category/walling-solutions, key: -44e39efd'
+            label: Link
+            name: '-44e39efd'
+            widget: string
+          - hint: 'Original link: /category/pavement-solution, key: -386212ba'
+            label: Link
+            name: '-386212ba'
+            widget: string
+          - hint: 'Original link: /category/curb-stones, key: 44768dd7'
+            label: Link
+            name: 44768dd7
+            widget: string
+          - hint: 'Original link: /category/precast-elements, key: caf11a4'
+            label: Link
+            name: caf11a4
+            widget: string
+          - hint: 'Original link: /about, key: 55b8e8be'
+            label: Link
+            name: 55b8e8be
+            widget: string
+          - hint: 'Original link: /green-building-center, key: 763e1df5'
+            label: Link
+            name: 763e1df5
+            widget: string
+          - hint: 'Original link: /clients, key: 45a2c2f9'
+            label: Link
+            name: 45a2c2f9
+            widget: string
+          - hint: 'Original link: /gallery, key: 6a3b443'
+            label: Link
+            name: 6a3b443
+            widget: string
+          - hint: 'Original link: /brochures, key: 7ca82980'
+            label: Link
+            name: 7ca82980
+            widget: string
+          - hint: 'Original link: /contact-us, key: 5e5270da'
+            label: Link
+            name: 5e5270da
+            widget: string
+          - hint: 'Original link: /products, key: -343cd6d'
+            label: Link
+            name: '-343cd6d'
+            widget: string
+          - hint: 'Original link: /resources, key: 634882d6'
+            label: Link
+            name: 634882d6
+            widget: string
+          - hint: 'Original link: tel:+919832532756, key: 1e28d626'
+            label: Link
+            name: 1e28d626
+            widget: string
+          - hint: 'Original link: mailto:shree_swastick@yahoo.com, key: 21401470'
+            label: Link
+            name: '21401470'
+            widget: string
+          - hint: >-
+              Original link: https://www.facebook.com/shreeswastickindustries/,
+              key: 18ed3b53
+            label: Link
+            name: 18ed3b53
+            widget: string
+          - hint: >-
+              Original link:
+              https://www.instagram.com/shreeswastickindustries/?hl=en, key:
+              -6973cdca
+            label: Link
+            name: '-6973cdca'
+            widget: string
+          - hint: 'Original link: #contact-us, key: 639a0fce'
+            label: Link
+            name: 639a0fce
+            widget: string
+      - label: Images
+        name: images
+        file: cms/_data/images.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Images
+          - label: Image
+            name: 38b6930a
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-70f6df7d'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-58b0e6b3'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-356d15a0'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: cbdc3f8
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-422c5a63'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 700801b5
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 384c54fd
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-7f4e60c3'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-6c856591'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-732c7455'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-ca5573e'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 1f764d6
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-4ead84ad'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 7efb592
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-55ca6be5'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-5800ec32'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 6b1d560b
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 6cd22eaa
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 3853e8e9
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 238f8c4f
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 2fc60b85
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 576093f4
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-51e0e1fa'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 3e452cbd
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 4e36dc6f
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-190b136a'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-3cbca8bd'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 2ecb4973
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-7933d2a6'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-2d99eb2e'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-75ebcc95'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 6973fbc
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 1fdf3c9c
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '2879e743'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+local_backend: true
+publish_mode: editorial_workflow
