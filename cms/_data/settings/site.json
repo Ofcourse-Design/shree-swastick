@@ -1,5 +1,5 @@
 {
-  "domain": "",
+  "domain": "https://shreeswastick.com/",
   "images_optimization": {
     "formats": [
       "webp"
@@ -9,5 +9,6 @@
       1080,
       1600
     ]
-  }
+  },
+  "favicon": "/assets/images/favicon.ico"
 }
