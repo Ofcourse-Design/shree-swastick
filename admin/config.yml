@@ -1,6 +1,6 @@
 backend:
   name: git-gateway
-  repo: Ofcourse-Design/shree-swastick
+  repo: akshittantia/shree-swastick
   branch: main
   accept_roles:
     - admin
